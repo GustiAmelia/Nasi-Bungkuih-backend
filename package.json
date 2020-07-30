@@ -1,0 +1,26 @@
+{
+  "name": "projectweek4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GustiAmelia/Project-API-.git"
+  },
+  "author": "GustiAmelia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GustiAmelia/Project-API-/issues"
+  },
+  "homepage": "https://github.com/GustiAmelia/Project-API-#readme"
+}
