@@ -10,6 +10,9 @@ const categoryRouter = express.Router();
 //IMPLEMENTASI
 categoryRouter.get('/',categoryControllers.getProductCategory);
 categoryRouter.post('/',categoryControllers.postNewCategory);
+categoryRouter.patch('/',categoryControllers.updateCategory);
+categoryRouter.delete('/',categoryControllers.deleteCategory);
+
 
 
 //EXPORTS

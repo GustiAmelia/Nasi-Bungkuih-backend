@@ -21,6 +21,25 @@ const productControllers = {
         }).catch((error)=>{
             res,json(error);     
         })
+    },
+    updateProduct:(req,res)=>{
+        productModels
+        .updateProduct(req.body,req.params)
+        .then((results)=>{
+            res.json(results);
+        }).catch((error)=>{
+            res.json(error);
+        })
+    },
+    deleteProduct:(req,res)=>{
+        productModels
+        .deleteProduct(req.body)
+        .then((results)=>{
+            res.json(results);
+        }).catch((error)=>{
+            res.json(error);
+        })
+
     }
 }
 

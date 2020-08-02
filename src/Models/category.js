@@ -28,6 +28,30 @@ const categoryModels ={
             });
         });
     },
+    updateCategory :((body,params)=>{
+        return new Promise((resolve,reject)=>{
+            const queryString='UPDATE category SET category_name=? WHERE id=?';
+            connection.query(queryString,[body.category_name,params.id],(error,results)=>{
+                if(!error){
+                    resolve(results);
+                }else{
+                    reject(error);
+                }
+            });
+        });
+    }),
+    deleteCategory : (params)=>{
+        return new Promise((resolve,reject)=>{
+            const queryString ='DELETE FROM category WHERE id=?';
+            connection.query(queryString,[params.id],(error,results)=>{
+                if(!error){
+                    resolve(results);
+                }else{
+                    reject(error);
+                }
+            })
+        });
+    }
 };
 
 //EXPORTS

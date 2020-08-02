@@ -4,8 +4,8 @@ const categoryModels = require('../Models/product');
 // IMPLEMENTASI
 const categoryControllers = {
     getProductCategory:(_,res)=>{
-        productModels
-        .getAllProduct()
+        categoryModels
+        .getProductCategory()
         .then((results)=>{
             res.json(results);
         })
@@ -14,13 +14,32 @@ const categoryControllers = {
         })
     },
     postNewCategory:(req,res)=>{
-        productModels
-        .postNewProduct(req.body)
+        categoryModels
+        .postNewCategory(req.body)
         .then((results)=>{
             res.json(results);
         }).catch((error)=>{
             res,json(error);     
         })
+    },
+    updateCategory:(req,res)=>{
+        categoryModels
+        .updateCategory(req.body,req.params)
+        .then((results)=>{
+            res.json(results);
+        }).catch((error)=>{
+            res.json(error);
+        })
+    },
+    deleteCategory:(req,res)=>{
+        categoryModels
+        .deleteCategory(req.body)
+        .then((results)=>{
+            res.json(results);
+        }).catch((error)=>{
+            res.json(error);
+        })
+
     }
 }
 

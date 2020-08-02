@@ -27,6 +27,30 @@ const productModels ={
             });
         });
     },
+    updateProduct :((body,params)=>{
+        return new Promise((resolve,reject)=>{
+            const queryString='UPDATE product SET product_name=? WHERE id=?';
+            connection.query(queryString,[body.category_name,params.id],(error,results)=>{
+                if(!error){
+                    resolve(results);
+                }else{
+                    reject(error);
+                }
+            });
+        });
+    }),
+    deleteProduct : (params)=>{
+        return new Promise((resolve,reject)=>{
+            const queryString ='DELETE FROM product WHERE id=?';
+            connection.query(queryString,[params.id],(error,results)=>{
+                if(!error){
+                    resolve(results);
+                }else{
+                    reject(error);
+                }
+            })
+        });
+    }
 };
 
 //EXPORTS
