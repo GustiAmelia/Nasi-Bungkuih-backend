@@ -87,6 +87,18 @@ const productModels ={
                 }
             });
         });
+    },
+    searchProductByName :(word)=>{
+        return new Promise((resolve,reject)=>{
+            const queryString =`SELECT * FROM product WHERE product_name LIKE '%${word}%'`;
+            connection.query(queryString,(error,results)=>{
+                if(!error){
+                    resolve(results);
+                }else{
+                    reject(error);
+                }
+            }) 
+        });
     }
 
 };

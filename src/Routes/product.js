@@ -15,6 +15,7 @@ productRouter.delete('/',productControllers.deleteProduct);
 productRouter.get('/sortingProductByName',productControllers.sortProductByName);
 productRouter.get('/sortingProductByCategory',productControllers.sortProductByCategory);
 productRouter.get('/sortingProductByPrice',productControllers.sortProductByCategory);
+productRouter.get('/searchProductByName',productControllers.searchProductByName);
 
 
 

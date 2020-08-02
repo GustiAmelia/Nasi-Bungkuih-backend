@@ -66,6 +66,15 @@ const productControllers = {
         }).catch((error)=>{
             res.json(error)
         })
+    },
+    searchProductByName :(req,res)=>{
+        productModels
+        .searchProductByName(req.query.product_name)
+        .then((results)=>{
+            res.json(results);
+        }).catch((error)=>{
+            res.json(error);
+        })
     }
 }
 
