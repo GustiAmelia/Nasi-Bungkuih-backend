@@ -51,7 +51,44 @@ const productModels ={
                 }
             })
         });
+    },
+    sortProductByName:()=>{
+        return new Promise((resolve,reject)=>{
+            const queryString='SELECT * FROM product ORDER BY product_name';
+            connection.query(queryString,(error,results)=>{
+                if(!error){
+                    resolve(results);
+                }else{
+                    reject(error);
+                }
+            });
+        });
+    },
+    sortProductByCategory :()=>{
+        return new Promise((resolve,reject)=>{
+            const queryString ='SELECT * FROM product ORDER BY id_category';
+            connection.query(queryString,(error,results)=>{
+                if(!error){
+                    resolve(results)
+                }else{
+                    reject(error);
+                }
+            })
+        })
+    },
+    sortProductByPrice : ()=>{
+        return new Promise((resolve,reject)=>{
+            const queryString ='SELECT * FROM product ORDER BY price';
+            connection.query(queryString,(error,results)=>{
+                if(!error){
+                    resolve(results);
+                }else{
+                    reject(error);
+                }
+            });
+        });
     }
+
 };
 
 //EXPORTS

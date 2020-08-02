@@ -12,6 +12,10 @@ productRouter.get('/',productControllers.getAllProduct);
 productRouter.post('/',productControllers.postNewProduct);
 productRouter.patch('/',productControllers.updateProduct);
 productRouter.delete('/',productControllers.deleteProduct);
+productRouter.get('/sortingProductByName',productControllers.sortProductByName);
+productRouter.get('/sortingProductByCategory',productControllers.sortProductByCategory);
+productRouter.get('/sortingProductByPrice',productControllers.sortProductByCategory);
+
 
 
 //EXPORTS

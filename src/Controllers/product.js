@@ -39,7 +39,33 @@ const productControllers = {
         }).catch((error)=>{
             res.json(error);
         })
-
+    },
+    sortProductByName : (req,res)=>{
+        productModels
+        .sortProductByName()
+        .then((results)=>{
+            res.json(results);
+        }).catch((error)=>{
+            res.json(error)
+        })
+    },
+    sortProductByCategory : (req,res)=>{
+        productModels
+        .sortProductByCategory()
+        .then((results)=>{
+            res.json(results);
+        }).catch((error)=>{
+            res.json(error)
+        })
+    },
+    sortProductByPrice : (req,res)=>{
+        productModels
+        .sortProductByPrice()
+        .then((results)=>{
+            res.json(results);
+        }).catch((error)=>{
+            res.json(error)
+        })
     }
 }
 
