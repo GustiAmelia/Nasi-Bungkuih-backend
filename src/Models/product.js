@@ -27,10 +27,11 @@ const productModels ={
             });
         });
     },
-    updateProduct :((body,params)=>{
+    updateProduct :(body)=>{
         return new Promise((resolve,reject)=>{
-            const queryString='UPDATE product SET product_name=? WHERE id=?';
-            connection.query(queryString,[body.category_name,params.id],(error,results)=>{
+            const { product_name, price, id_category } = body;
+            const queryString = `UPDATE product SET product_name = ?, price = ?, id_category = ? WHERE product.product_name = '${product_name}'`;
+            connection.query(queryString,[product_name, price, id_category],(error,results)=>{
                 if(!error){
                     resolve(results);
                 }else{
@@ -38,11 +39,11 @@ const productModels ={
                 }
             });
         });
-    }),
-    deleteProduct : (params)=>{
+    },
+    deleteProduct : (body)=>{
         return new Promise((resolve,reject)=>{
             const queryString ='DELETE FROM product WHERE id=?';
-            connection.query(queryString,[params.id],(error,results)=>{
+            connection.query(queryString,[body.id],(error,results)=>{
                 if(!error){
                     resolve(results);
                 }else{

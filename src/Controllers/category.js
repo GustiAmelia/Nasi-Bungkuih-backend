@@ -1,5 +1,5 @@
 //IMPORT
-const categoryModels = require('../Models/product');
+const categoryModels = require('../Models/category');
 
 // IMPLEMENTASI
 const categoryControllers = {
@@ -24,7 +24,7 @@ const categoryControllers = {
     },
     updateCategory:(req,res)=>{
         categoryModels
-        .updateCategory(req.body,req.params)
+        .updateCategory(req.body)
         .then((results)=>{
             res.json(results);
         }).catch((error)=>{

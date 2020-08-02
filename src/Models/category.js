@@ -28,10 +28,11 @@ const categoryModels ={
             });
         });
     },
-    updateCategory :((body,params)=>{
+    updateCategory :(body)=>{
         return new Promise((resolve,reject)=>{
-            const queryString='UPDATE category SET category_name=? WHERE id=?';
-            connection.query(queryString,[body.category_name,params.id],(error,results)=>{
+            const { category_name,id } = body;
+            const queryString = `UPDATE category SET category_name = ? WHERE id = '${id}'`;
+            connection.query(queryString,[category_name,id],(error,results)=>{
                 if(!error){
                     resolve(results);
                 }else{
@@ -39,11 +40,11 @@ const categoryModels ={
                 }
             });
         });
-    }),
-    deleteCategory : (params)=>{
+    },
+    deleteCategory : (body)=>{
         return new Promise((resolve,reject)=>{
             const queryString ='DELETE FROM category WHERE id=?';
-            connection.query(queryString,[params.id],(error,results)=>{
+            connection.query(queryString,[body],(error,results)=>{
                 if(!error){
                     resolve(results);
                 }else{

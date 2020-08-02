@@ -24,7 +24,7 @@ const productControllers = {
     },
     updateProduct:(req,res)=>{
         productModels
-        .updateProduct(req.body,req.params)
+        .updateProduct(req.body)
         .then((results)=>{
             res.json(results);
         }).catch((error)=>{
