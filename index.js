@@ -33,11 +33,20 @@ db.connect((err)=>{
     console.log("Database Connected");
 })
 
-app.get('/product',(req,res)=>{
+app.get('/productName',(req,res)=>{
     db.query(
-        'SELECT * FROM product',
+        'SELECT product_name FROM product',
         (error,result)=>{
             res.json(result);
     }
+    );
+});
+
+app.get('/product',(req,res)=>{
+    db.query(
+        'SELECT * FROM product WHERE product_name="Espresso"',
+        (error,result)=>{
+            res.json(result);
+        }
     );
 });
