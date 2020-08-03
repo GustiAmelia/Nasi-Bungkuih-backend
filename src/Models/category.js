@@ -1,6 +1,5 @@
 // IMPORT
 const connection =require('../Configs/dbMySql');
-const e = require('express');
 
 // QUERY
 const categoryModels ={
