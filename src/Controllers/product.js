@@ -1,5 +1,6 @@
 //IMPORT
 const productModels = require('../Models/product');
+const formResponse= require('../Helpers/Form/formResponse');
 
 // IMPLEMENTASI
 const productControllers = {
@@ -7,73 +8,73 @@ const productControllers = {
         productModels
         .getAllProduct()
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         })
         .catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
     },
     postNewProduct:(req,res)=>{
         productModels
         .postNewProduct(req.body)
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);     
+            formResponse.err(res,error,500);    
         })
     },
     updateProduct:(req,res)=>{
         productModels
         .updateProduct(req.body)
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
     },
     deleteProduct:(req,res)=>{
         productModels
         .deleteProduct(req.body)
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
     },
     sortProductByName : (req,res)=>{
         productModels
         .sortProductByName()
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
     },
     sortProductByCategory : (req,res)=>{
         productModels
         .sortProductByCategory()
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
     },
     sortProductByPrice : (req,res)=>{
         productModels
         .sortProductByPrice()
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
     },
     searchProductByName :(req,res)=>{
         productModels
         .searchProductByName(req.query.product_name)
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
     }
 }

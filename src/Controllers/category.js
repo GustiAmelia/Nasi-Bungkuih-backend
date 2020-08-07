@@ -1,5 +1,6 @@
 //IMPORT
 const categoryModels = require('../Models/category');
+const formResponse= require('../Helpers/Form/formResponse');
 
 // IMPLEMENTASI
 const categoryControllers = {
@@ -7,37 +8,37 @@ const categoryControllers = {
         categoryModels
         .getProductCategory()
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         })
         .catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
     },
     postNewCategory:(req,res)=>{
         categoryModels
         .postNewCategory(req.body)
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);     
+            formResponse.err(res,error,500);     
         })
     },
     updateCategory:(req,res)=>{
         categoryModels
         .updateCategory(req.body)
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
     },
     deleteCategory:(req,res)=>{
         categoryModels
         .deleteCategory(req.body)
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
 
     }

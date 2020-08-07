@@ -1,5 +1,6 @@
 //IMPORT
 const historyModels =require('../Models/history');
+const formResponse= require('../Helpers/Form/formResponse');
 
 //IMPLEMENTASI
 const historyControllers={
@@ -7,18 +8,18 @@ const historyControllers={
         historyModels
         .getAllHistory()
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
     },
     postNewHistory :(req,res)=>{
         historyModels
         .postNewHistory(req.body)
         .then((results)=>{
-            res.status(200).json(results);
+            formResponse.success(res,results,200);
         }).catch((error)=>{
-            res.status(500).json(error);
+            formResponse.err(res,error,500);
         })
     }
 }
