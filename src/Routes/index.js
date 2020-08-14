@@ -5,14 +5,21 @@ const express = require("express");
 const productRouter = require("./product");
 const categoryRouter = require("./category");
 const historyRouter = require("./history");
-
+const authRouter = require("./auth");
+const checkToken =require("../Helpers/Middlewares/checkToken");
 //DEKLARASI
 const indexRouter = express.Router();
 
 //IMPLEMENTASI
-indexRouter.use('/product',productRouter);
+
+// PRIVATE ROUTE
+
+//PUBLIC ROUTE
+indexRouter.use('/product',checkToken,productRouter);
 indexRouter.use('/category',categoryRouter);
 indexRouter.use('/history',historyRouter);
+indexRouter.use('/auth',authRouter);
+
 
 //EXPORTS
 module.exports = indexRouter;
