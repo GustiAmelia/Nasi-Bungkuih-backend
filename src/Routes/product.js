@@ -12,10 +12,9 @@ productRouter.get('/',productControllers.getAllProduct);
 productRouter.post('/',productControllers.postNewProduct);
 productRouter.patch('/',productControllers.updateProduct);
 productRouter.delete('/',productControllers.deleteProduct);
-productRouter.get('/sortingProductByName',productControllers.sortProductByName);
-productRouter.get('/sortingProductByCategory',productControllers.sortProductByCategory);
-productRouter.get('/sortingProductByPrice',productControllers.sortProductByCategory);
-productRouter.get('/searchProductByName',productControllers.searchProductByName);
+productRouter.get('/sort',productControllers.sortProduct);
+productRouter.get('/search',productControllers.searchProductByName);
+productRouter.get('/pagination',productControllers.getPaginationProduct);
 
 
 

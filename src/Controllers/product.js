@@ -41,27 +41,9 @@ const productControllers = {
             formResponse.err(res,error,500);
         })
     },
-    sortProductByName : (req,res)=>{
+    sortProduct : (req,res)=>{
         productModels
-        .sortProductByName()
-        .then((results)=>{
-            formResponse.success(res,results,200);
-        }).catch((error)=>{
-            formResponse.err(res,error,500);
-        })
-    },
-    sortProductByCategory : (req,res)=>{
-        productModels
-        .sortProductByCategory()
-        .then((results)=>{
-            formResponse.success(res,results,200);
-        }).catch((error)=>{
-            formResponse.err(res,error,500);
-        })
-    },
-    sortProductByPrice : (req,res)=>{
-        productModels
-        .sortProductByPrice()
+        .sortProduct(req.query)
         .then((results)=>{
             formResponse.success(res,results,200);
         }).catch((error)=>{
@@ -73,6 +55,16 @@ const productControllers = {
         .searchProductByName(req.query.product_name)
         .then((results)=>{
             formResponse.success(res,results,200);
+        }).catch((error)=>{
+            formResponse.err(res,error,500);
+        })
+    },
+    getPaginationProduct:(req,res)=>{
+        const {page,limit}=req.query;
+        productModels
+        .getPaginationProduct(page,limit)
+        .then((results)=>{
+            formResponse.pagination(req,res,results);
         }).catch((error)=>{
             formResponse.err(res,error,500);
         })

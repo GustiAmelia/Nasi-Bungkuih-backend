@@ -52,33 +52,9 @@ const productModels ={
             })
         });
     },
-    sortProductByName:()=>{
+    sortProduct: (query)=>{
         return new Promise((resolve,reject)=>{
-            const queryString='SELECT * FROM product ORDER BY product_name';
-            connection.query(queryString,(error,results)=>{
-                if(!error){
-                    resolve(results);
-                }else{
-                    reject(error);
-                }
-            });
-        });
-    },
-    sortProductByCategory :()=>{
-        return new Promise((resolve,reject)=>{
-            const queryString ='SELECT * FROM product ORDER BY id_category';
-            connection.query(queryString,(error,results)=>{
-                if(!error){
-                    resolve(results)
-                }else{
-                    reject(error);
-                }
-            })
-        })
-    },
-    sortProductByPrice : ()=>{
-        return new Promise((resolve,reject)=>{
-            const queryString ='SELECT * FROM product ORDER BY price';
+            const queryString=`SELECT * FROM product ORDER BY ${query.by} ${query.order}`;
             connection.query(queryString,(error,results)=>{
                 if(!error){
                     resolve(results);
@@ -99,8 +75,21 @@ const productModels ={
                 }
             }) 
         });
+    },
+    getPaginationProduct :(page,limit)=>{
+        return new Promise((resolve,reject)=>{
+            const offset = (page-1)*limit;
+            const queryString = 'SELECT * FROM product LIMIT ? OFFSET ?';
+            connection.query(queryString,[Number(limit),offset],(error,results)=>{
+                // console.log(results);
+                if(!error){
+                    resolve(results);
+                }else{
+                    reject(error);
+                }
+            });
+        });
     }
-
 };
 
 //EXPORTS

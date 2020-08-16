@@ -14,6 +14,24 @@ const formResponse ={
             results : error
         }
         res.json(response);
+    },
+    pagination :({query},res,results)=>{
+        const page =Number(query.page);
+        const limit = Number(query.limit);
+        const prevPage = page === 1 ? "" : `/product/pagination?page=${page - 1}&limit=${limit}`;
+        const nextPage = `/product/pagination?page=${page + 1}&limit=${limit}`;
+        const responseObject = {
+            success: true,
+            status: 200,
+            results,
+            pageInfo: {
+              currentPage: query.page,
+              limit: query.limit,
+              prevPage,
+              nextPage,
+            },
+          };
+          res.json(responseObject);
     }
 }
 

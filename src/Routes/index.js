@@ -13,9 +13,9 @@ const indexRouter = express.Router();
 //IMPLEMENTASI
 
 // PRIVATE ROUTE
-
-//PUBLIC ROUTE
 indexRouter.use('/product',checkToken,productRouter);
+//PUBLIC ROUTE
+
 indexRouter.use('/category',categoryRouter);
 indexRouter.use('/history',historyRouter);
 indexRouter.use('/auth',authRouter);

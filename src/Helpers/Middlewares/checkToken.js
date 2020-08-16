@@ -16,7 +16,7 @@ const checkToken =(req,res,next)=>{
         next()
     }
     catch (e) {
-        formResponse.error(res, e);
+        formResponse.err(res, e);
       }
 };
 
