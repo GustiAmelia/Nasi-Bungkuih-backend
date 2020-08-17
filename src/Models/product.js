@@ -29,9 +29,9 @@ const productModels ={
     },
     updateProduct :(body)=>{
         return new Promise((resolve,reject)=>{
-            const { product_name, price, id_category } = body;
-            const queryString = `UPDATE product SET product_name = ?, price = ?, id_category = ? WHERE product.product_name = '${product_name}'`;
-            connection.query(queryString,[product_name, price, id_category],(error,results)=>{
+            const { id } = body;
+            const queryString = `UPDATE product SET ? WHERE product.id=${id}`;
+            connection.query(queryString,[body],(error,results)=>{
                 if(!error){
                     resolve(results);
                 }else{
@@ -40,10 +40,10 @@ const productModels ={
             });
         });
     },
-    deleteProduct : (body)=>{
+    deleteProduct : (query)=>{
         return new Promise((resolve,reject)=>{
             const queryString ='DELETE FROM product WHERE id=?';
-            connection.query(queryString,[body.id],(error,results)=>{
+            connection.query(queryString,[query.id],(error,results)=>{
                 if(!error){
                     resolve(results);
                 }else{

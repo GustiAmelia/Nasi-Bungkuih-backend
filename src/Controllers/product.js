@@ -34,7 +34,7 @@ const productControllers = {
     },
     deleteProduct:(req,res)=>{
         productModels
-        .deleteProduct(req.body)
+        .deleteProduct(req.query)
         .then((results)=>{
             formResponse.success(res,results,200);
         }).catch((error)=>{
