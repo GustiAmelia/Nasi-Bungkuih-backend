@@ -29,9 +29,9 @@ const categoryModels ={
     },
     updateCategory :(body)=>{
         return new Promise((resolve,reject)=>{
-            const { category_name,id } = body;
-            const queryString = `UPDATE category SET category_name = ? WHERE id = '${id}'`;
-            connection.query(queryString,[category_name,id],(error,results)=>{
+            const {id}=body;
+            const queryString = `UPDATE category SET ? WHERE category.id = '${id}'`;
+            connection.query(queryString,[body],(error,results)=>{
                 if(!error){
                     resolve(results);
                 }else{
@@ -40,10 +40,10 @@ const categoryModels ={
             });
         });
     },
-    deleteCategory : (body)=>{
+    deleteCategory : (query)=>{
         return new Promise((resolve,reject)=>{
             const queryString ='DELETE FROM category WHERE id=?';
-            connection.query(queryString,[body],(error,results)=>{
+            connection.query(queryString,[query.id],(error,results)=>{
                 if(!error){
                     resolve(results);
                 }else{

@@ -47,6 +47,9 @@ const authModel ={
     return new Promise((resolve,reject)=>{
       const qs = 'SELECT username, password, level_id FROM users WHERE username=?';
       connection.query(qs, body.username ,(error,results)=>{
+        if(error){
+          reject(error)
+        }
         if(!results.length){
           reject('User Not Found');
         }
@@ -62,7 +65,7 @@ const authModel ={
               const token = jwt.sign(payload,process.env.SECRET_KEY,{
                 expiresIn:'10d',
               });
-              const msg ='Login Succes';
+              const msg ='Login Success';
               resolve({msg,token});
             }
             if(!results){

@@ -34,7 +34,7 @@ const categoryControllers = {
     },
     deleteCategory:(req,res)=>{
         categoryModels
-        .deleteCategory(req.body)
+        .deleteCategory(req.query)
         .then((results)=>{
             formResponse.success(res,results,200);
         }).catch((error)=>{
