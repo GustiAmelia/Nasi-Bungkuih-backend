@@ -54,22 +54,11 @@ const productModels ={
             })
         });
     },
-    sortProduct: (query)=>{
+    searchProductByName :(word, by, order,page,limit)=>{
         return new Promise((resolve,reject)=>{
-            const queryString=`SELECT * FROM product ORDER BY ${query.by} ${query.order}`;
-            connection.query(queryString,(error,results)=>{
-                if(!error){
-                    resolve(results);
-                }else{
-                    reject(error);
-                }
-            });
-        });
-    },
-    searchProductByName :(word)=>{
-        return new Promise((resolve,reject)=>{
-            const queryString =`SELECT * FROM product WHERE product_name LIKE '%${word}%'`;
-            connection.query(queryString,(error,results)=>{
+            const offset =(page-1)*limit;
+            const queryString =`SELECT * FROM product WHERE product_name LIKE '%${word}%' ORDER BY ${by} ${order} LIMIT ${limit} OFFSET ${offset}`;
+            connection.query(queryString,[word,by,order,Number(limit),offset],(error,results)=>{
                 if(!error){
                     resolve(results);
                 }else{

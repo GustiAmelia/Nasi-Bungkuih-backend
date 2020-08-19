@@ -19,10 +19,7 @@ const productControllers = {
         productModels
         .postNewProduct(req.body)
         .then((results)=>{
-            const object={
-                msg: 'insert product success'
-            }
-            formResponse.success(res,object,200);
+            formResponse.success(res,req.body,200);
         }).catch((error)=>{
             formResponse.err(res,error,500);    
         })
@@ -45,20 +42,12 @@ const productControllers = {
             formResponse.err(res,error,500);
         })
     },
-    sortProduct : (req,res)=>{
-        productModels
-        .sortProduct(req.query)
-        .then((results)=>{
-            formResponse.success(res,results,200);
-        }).catch((error)=>{
-            formResponse.err(res,error,500);
-        })
-    },
     searchProductByName :(req,res)=>{
+        const{product_name,by,order,page,limit}=req.query;
         productModels
-        .searchProductByName(req.query.product_name)
+        .searchProductByName(product_name,by,order,page,limit)
         .then((results)=>{
-            formResponse.success(res,results,200);
+            formResponse.pagination(req,res,results,200);
         }).catch((error)=>{
             formResponse.err(res,error,500);
         })
