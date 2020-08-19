@@ -3,12 +3,14 @@ const connection =require('../Configs/dbMySql');
 
 // QUERY
 const productModels ={
-    getAllProduct : ()=>{
+    getAllProduct : (page,limit)=>{
         return new Promise((resolve,reject)=>{
-            const queryString ='SELECT p1.id, product_name AS menu,img_product AS images, price, quantity, category_name AS category FROM product AS p1 INNER JOIN category AS p2 ON p1.id_category = p2.id';
-            connection.query(queryString,(error,results)=>{
+            const offset = (page-1)*limit;
+            const queryString ='SELECT p1.id, product_name AS menu,img_product AS images, price, quantity, category_name AS category FROM product AS p1 INNER JOIN category AS p2 ON p1.id_category = p2.id LIMIT ? OFFSET ?';
+            connection.query(queryString,[Number(limit),offset],(error,results)=>{
                 if(!error){
                     resolve(results);
+                    console.log(results);
                 }else{
                     reject(error);
                 }
@@ -76,20 +78,7 @@ const productModels ={
             }) 
         });
     },
-    getPaginationProduct :(page,limit)=>{
-        return new Promise((resolve,reject)=>{
-            const offset = (page-1)*limit;
-            const queryString = 'SELECT * FROM product LIMIT ? OFFSET ?';
-            connection.query(queryString,[Number(limit),offset],(error,results)=>{
-                // console.log(results);
-                if(!error){
-                    resolve(results);
-                }else{
-                    reject(error);
-                }
-            });
-        });
-    }
+    
 };
 
 //EXPORTS

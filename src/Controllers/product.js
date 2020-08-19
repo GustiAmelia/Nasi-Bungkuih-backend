@@ -4,11 +4,12 @@ const formResponse= require('../Helpers/Form/formResponse');
 
 // IMPLEMENTASI
 const productControllers = {
-    getAllProduct:(_,res)=>{
+    getAllProduct:(req,res)=>{
+        const{page,limit}=req.query
         productModels
-        .getAllProduct()
+        .getAllProduct(page,limit)
         .then((results)=>{
-            formResponse.success(res,results,200);
+            formResponse.pagination(req,res,results,200);
         })
         .catch((error)=>{
             formResponse.err(res,error,500);
@@ -18,7 +19,10 @@ const productControllers = {
         productModels
         .postNewProduct(req.body)
         .then((results)=>{
-            formResponse.success(res,results,200);
+            const object={
+                msg: 'insert product success'
+            }
+            formResponse.success(res,object,200);
         }).catch((error)=>{
             formResponse.err(res,error,500);    
         })
@@ -55,16 +59,6 @@ const productControllers = {
         .searchProductByName(req.query.product_name)
         .then((results)=>{
             formResponse.success(res,results,200);
-        }).catch((error)=>{
-            formResponse.err(res,error,500);
-        })
-    },
-    getPaginationProduct:(req,res)=>{
-        const {page,limit}=req.query;
-        productModels
-        .getPaginationProduct(page,limit)
-        .then((results)=>{
-            formResponse.pagination(req,res,results);
         }).catch((error)=>{
             formResponse.err(res,error,500);
         })

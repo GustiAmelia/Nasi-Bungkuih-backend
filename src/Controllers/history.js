@@ -17,7 +17,10 @@ const historyControllers={
         historyModels
         .postNewHistory(req.body)
         .then((results)=>{
-            formResponse.success(res,results,200);
+            const object={
+                msg:'insert history success'
+            }
+            formResponse.success(res,object,200);
         }).catch((error)=>{
             formResponse.err(res,error,500);
         })

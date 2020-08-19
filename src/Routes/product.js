@@ -17,7 +17,6 @@ productRouter.patch('/',checkToken.adminToken,productControllers.updateProduct);
 productRouter.delete('/',checkToken.adminToken,productControllers.deleteProduct);
 productRouter.get('/sort',checkToken.adminToken,productControllers.sortProduct);
 productRouter.get('/search',checkToken.adminToken,productControllers.searchProductByName);
-productRouter.get('/pagination',checkToken.adminToken,productControllers.getPaginationProduct);
 
 
 

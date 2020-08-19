@@ -13,7 +13,6 @@ const checkToken ={
         try{
             const token = bearerToken.split(' ')[1];
             const decoded = jwt.verify(token, process.env.SECRET_KEY);
-            console.log(decoded);
             req.decodedToken = decoded;
             next()
         }
@@ -32,7 +31,7 @@ const checkToken ={
             const token = bearerToken.split(' ')[1];
             const decoded = jwt.verify(token, process.env.SECRET_KEY);
             console.log(decoded);
-            if(decoded.level_id==='1'){
+            if(decoded.level_id===1){
                 req.decodedToken = decoded;
                 next()
             }else{

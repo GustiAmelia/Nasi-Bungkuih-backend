@@ -6,7 +6,10 @@ const authControllers ={
       authModel
       .postNewUser(req.body)
       .then((results)=>{
-        formResponse.success(res,results,200);
+          const object ={
+              msg:'Registere Success'
+          }
+        formResponse.success(res,object,200);
         }).catch((error)=>{
             formResponse.err(res,error,500);
         })

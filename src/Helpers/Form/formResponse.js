@@ -19,7 +19,7 @@ const formResponse ={
         const page =Number(query.page);
         const limit = Number(query.limit);
         const prevPage = page === 1 ? "" : `/product/pagination?page=${page - 1}&limit=${limit}`;
-        const nextPage = `/product/pagination?page=${page + 1}&limit=${limit}`;
+        const nextPage = results.length < limit ? "" : `/product/pagination?page=${page + 1}&limit=${limit}`;
         const responseObject = {
             success: true,
             status: 200,
