@@ -4,17 +4,27 @@ const formResponse= require('../Helpers/Form/formResponse');
 
 // IMPLEMENTASI
 const productControllers = {
-    getAllProduct:(req,res)=>{
-        const{page,limit}=req.query
+    getAllProduct:(_,res)=>{
         productModels
-        .getAllProduct(page,limit)
+        .getAllProduct()
         .then((results)=>{
-            formResponse.pagination(req,res,results,200);
+            formResponse.success(res,results,200);
         })
         .catch((error)=>{
-            formResponse.err(res,error,500);
+            formResponse.err(res,error,500)
         })
     },
+    // getAllProduct:(req,res)=>{
+    //     const{page,limit}=req.query
+    //     productModels
+    //     .getAllProduct(page,limit)
+        // .then((results)=>{
+        //     formResponse.pagination(req,res,results,200);
+        // })
+        // .catch((error)=>{
+        //     formResponse.err(res,error,500);
+        // })
+    // },
     postNewProduct:(req,res)=>{
         productModels
         .postNewProduct(req.body)

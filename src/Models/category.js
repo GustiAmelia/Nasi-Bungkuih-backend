@@ -5,7 +5,7 @@ const connection =require('../Configs/dbMySql');
 const categoryModels ={
     getProductCategory : ()=>{
         return new Promise((resolve,reject)=>{
-            const queryString ='SELECT p1.id, product_name AS product, category_name AS category FROM product AS p1 INNER JOIN category AS p2 ON p1.id_category = p2.id';
+            const queryString ='SELECT * FROM category';
             connection.query(queryString,(error,results)=>{
                 if(!error){
                     resolve(results);
