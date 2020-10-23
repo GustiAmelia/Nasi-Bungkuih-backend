@@ -39,7 +39,6 @@ const checkToken ={
                     msg:'you are not allowed'
                 });
             }
-            
         }
         catch (e) {
             formResponse.err(res, e);

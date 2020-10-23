@@ -10,16 +10,15 @@ const checkToken = require('../Helpers/Middlewares/checkToken');
 const productRouter = express.Router();
 
 //IMPLEMENTASI
-productRouter.get('/',checkToken.checkToken,productControllers.getAllProduct);
-productRouter.post('/',checkToken.adminToken,uploadImage.singleUpload,productControllers.postNewProduct);
-productRouter.patch('/updateImage',checkToken.adminToken,uploadImage.singleUpload,productControllers.updateProduct);
-productRouter.patch('/',checkToken.adminToken,productControllers.updateProduct);
+productRouter.get('/',productControllers.getAllProduct);
+productRouter.post('/',uploadImage.singleUpload,productControllers.postNewProduct);
+productRouter.patch('/',uploadImage.singleUpload,productControllers.updateProduct);
 productRouter.delete('/',checkToken.adminToken,productControllers.deleteProduct);
-productRouter.get('/search',checkToken.checkToken,productControllers.searchProductByName);
+productRouter.get('/search',productControllers.searchProductByName);
+
 
 
 
 //EXPORTS
 module.exports = productRouter;
-
 

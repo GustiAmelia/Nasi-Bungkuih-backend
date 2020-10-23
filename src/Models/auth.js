@@ -13,40 +13,50 @@ const authModel ={
         }
         if(results.length){
           reject({
-            msg:'username is already taken!'
+            msg:'username already registed'
           })
         }else{
-          bcrypt.genSalt(10,(error,salt)=>{
-            if(error){
+          const querySelectEmail ='SELECT email FROM users WHERE email=?';
+          connection.query(querySelectEmail,[body.email],(error,results)=>{
+            if(!results){
               reject(error);
             }
-    
-            const{password}=body;
-            bcrypt.hash(password,salt,(error,hashedPassword)=>{
-              if(error){
-                reject(error);
-              }
-              const newBody={...body, password:hashedPassword};
-              const qs = 'INSERT INTO users SET ?';
-              connection.query(qs,newBody,(error,results)=>{
-                console.log(newBody);
-                if(!error){
-                    resolve(results);
-                }else{
-                    reject(error);
-                }
+            if(results.length){
+              reject({
+                msg:'Email already registed'
               });
-            });
+            }else{
+              bcrypt.genSalt(10,(error,salt)=>{
+                if(error){
+                  reject(error);
+                }
+                const{password}=body;
+                bcrypt.hash(password,salt,(error,hashedPassword)=>{
+                  if(error){
+                    reject(error);
+                  }
+                  const newBody={...body, password:hashedPassword};
+                  const qs = 'INSERT INTO users SET ?';
+                  connection.query(qs,newBody,(error,results)=>{
+                    console.log(newBody);
+                    if(!error){
+                        resolve(results);
+                    }else{
+                        reject(error);
+                    }
+                  });
+                });
+              });
+            }
           });
-        }
+        }  
       })
-      
     });
   },
   loginUser :(body)=>{
     return new Promise((resolve,reject)=>{
-      const qs = 'SELECT username, password, level_id FROM users WHERE username=?';
-      connection.query(qs, body.username ,(error,results)=>{
+      const qs ='SELECT username, password, level_id, email FROM users WHERE email=?';
+      connection.query(qs,body.email,(error,results)=>{
         if(error){
           reject(error)
         }
@@ -56,19 +66,18 @@ const authModel ={
         else{
           bcrypt.compare(body.password, results[0].password,(error,isSame)=>{
             if(isSame){
-              const {username}=body;
+              const {email}=body;
               const {level_id}=results[0];
               const payload={
-                username,
-                level_id
+                email,
+                level_id,
               };
               const token = jwt.sign(payload,process.env.SECRET_KEY,{
-                expiresIn:'10d',
               });
               const msg ='Login Success';
               resolve({msg,token});
             }
-            if(!results){
+            if(!isSame){
               reject({msg:'Wrong Password'});
             }
             if(error){
@@ -76,9 +85,9 @@ const authModel ={
             }
           });
         }
-      });
-    });
-  },
+      })
+    })
+  }
 }
 
 module.exports=authModel;

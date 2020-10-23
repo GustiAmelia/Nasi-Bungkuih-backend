@@ -1,21 +1,51 @@
 //IMPORT
 const connection =require('../Configs/dbMySql');
+const { query } = require('express');
 
 // QUERY
 const productModels ={
-    getAllProduct : (page,limit)=>{
+    // getAllProduct : (page,limit,name,sortby,order)=>{
+    //     let queryString='';
+    //     const offset = (page-1)*limit;
+    //     if(name===undefined && sortby===undefined && order===undefined){
+    //         queryString =`SELECT p1.id, product_name AS menu,img_product AS images, price, quantity, category_name, description FROM product AS p1 INNER JOIN category AS p2 ON p1.id_category = p2.id LIMIT ${limit} OFFSET ${offset}`;
+    //     }
+    //     else if(sortby===undefined && order===undefined){
+    //         queryString =`SELECT p1.id, product_name AS menu,img_product AS images, price, quantity, category_name, description FROM product AS p1 INNER JOIN category AS p2 ON p1.id_category = p2.id WHERE product_name LIKE '%${name}%' LIMIT ${limit} OFFSET ${offset}`;
+    //     }
+    //     else if(order===undefined){
+    //         queryString =`SELECT p1.id, product_name AS menu,img_product AS images, price, quantity, category_name, description FROM product AS p1 INNER JOIN category AS p2 ON p1.id_category = p2.id WHERE product_name LIKE '%${name}%' ORDER BY ${sortby} LIMIT ${limit} OFFSET ${offset}`;
+    //     }
+    //     else if(name===undefined){
+    //         queryString =`SELECT p1.id, product_name AS menu,img_product AS images, price, quantity, category_name, description FROM product AS p1 INNER JOIN category AS p2 ON p1.id_category = p2.id ORDER BY ${sortby} ${order}LIMIT ${limit} OFFSET ${offset}`;
+    //     }
+    //     else{
+    //         queryString =`SELECT p1.id, product_name AS menu,img_product AS images, price, quantity, category_name, description FROM product AS p1 INNER JOIN category AS p2 ON p1.id_category = p2.id WHERE product_name LIKE '%${name}%' ORDER BY ${sortby} ${order} LIMIT ${limit} OFFSET ${offset}`;
+    //     }
+        
+    //     return new Promise((resolve,reject)=>{
+    //         connection.query(queryString,(error,results)=>{
+    //             if(!error){
+    //                 resolve(results);
+    //                 console.log(results);
+    //             }else{
+    //                 reject(error);
+    //             }
+    //         });
+    //     });
+    // },
+        // Mobile
+    getAllProduct :()=>{
         return new Promise((resolve,reject)=>{
-            const offset = (page-1)*limit;
-            const queryString ='SELECT p1.id, product_name AS menu,img_product AS images, price, quantity, category_name AS category FROM product AS p1 INNER JOIN category AS p2 ON p1.id_category = p2.id LIMIT ? OFFSET ?';
-            connection.query(queryString,[Number(limit),offset],(error,results)=>{
+            const queryString =`SELECT p1.id, product_name AS menu,img_product AS images, price, quantity, category_name, description FROM product AS p1 INNER JOIN category AS p2 ON p1.id_category = p2.id`
+            connection.query(queryString,(error,results)=>{
                 if(!error){
-                    resolve(results);
-                    console.log(results);
+                    resolve(results)
                 }else{
-                    reject(error);
+                    reject(error)
                 }
-            });
-        });
+            })
+        })
     },
     postNewProduct : (body)=>{
         return new Promise((resolve,reject)=>{
@@ -32,8 +62,8 @@ const productModels ={
     updateProduct :(body)=>{
         return new Promise((resolve,reject)=>{
             const { id } = body;
-            const queryString = `UPDATE product SET ? WHERE product.id=${id}`;
-            connection.query(queryString,[body],(error,results)=>{
+            const queryString = `UPDATE product SET ? WHERE product.id=?`;
+            connection.query(queryString,[body, body.id],(error,results)=>{
                 if(!error){
                     resolve(results);
                 }else{
@@ -54,19 +84,19 @@ const productModels ={
             })
         });
     },
-    searchProductByName :(word, by, order,page,limit)=>{
+        //Mobile
+    searchProductByName: (name,sortby)=>{
         return new Promise((resolve,reject)=>{
-            const offset =(page-1)*limit;
-            const queryString =`SELECT * FROM product WHERE product_name LIKE '%${word}%' ORDER BY ${by} ${order} LIMIT ${limit} OFFSET ${offset}`;
-            connection.query(queryString,[word,by,order,Number(limit),offset],(error,results)=>{
+            const queryString =`SELECT p1.id, product_name AS menu,img_product AS images, price, quantity, category_name, description FROM product AS p1 INNER JOIN category AS p2 ON p1.id_category = p2.id WHERE product_name LIKE '%${name}%' ORDER BY ${sortby}`
+            connection.query(queryString,(error,results)=>{
                 if(!error){
-                    resolve(results);
+                    resolve(results)
                 }else{
-                    reject(error);
+                    reject(error)
                 }
-            }) 
-        });
-    },
+            })
+        })
+    }
     
 };
 
